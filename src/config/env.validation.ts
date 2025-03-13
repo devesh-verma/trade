@@ -1,22 +1,40 @@
 import { Type, plainToInstance } from 'class-transformer';
-import {
-  IsInt,
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-  validateSync,
-} from 'class-validator';
+import { IsInt, IsNotEmpty, IsString, validateSync } from 'class-validator';
 
 export class EnvironmentVariables {
   // Server
   @IsInt()
-  @IsOptional()
   @Type(() => Number)
-  PORT?: number;
+  PORT!: number;
 
   @IsString()
   @IsNotEmpty()
   NODE_ENV!: string;
+
+  // JWT
+  @IsString()
+  @IsNotEmpty()
+  JWT_SECRET!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  JWT_REFRESH_SECRET!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  JWT_ACCESS_EXPIRATION!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  JWT_REFRESH_EXPIRATION!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  JWT_ACCESS_EXPIRATION_SECONDS!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  JWT_REFRESH_EXPIRATION_SECONDS!: string;
 }
 
 export function validate(config: Record<string, unknown>) {
@@ -27,10 +45,17 @@ export function validate(config: Record<string, unknown>) {
 
   const errors = validateSync(validatedConfig, {
     skipMissingProperties: false,
+    whitelist: true,
+    forbidNonWhitelisted: true,
   });
 
   if (errors.length > 0) {
-    throw new Error(errors.toString());
+    const errorMessages = errors.map((error) => {
+      return `${error.property}: ${Object.values(error.constraints || {}).join(', ')}`;
+    });
+    throw new Error(
+      `Configuration validation failed:\n${errorMessages.join('\n')}`,
+    );
   }
 
   return validatedConfig;

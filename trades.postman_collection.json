@@ -1,0 +1,415 @@
+{
+	"info": {
+		"_postman_id": "17c16173-f5a3-450b-8681-a8a127494a83",
+		"name": "Trades",
+		"description": "Authentication endpoints for the Trades application",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30742393"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Sign Up",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();",
+									"if (pm.response.code === 200) {",
+									"    const accessToken = response.accessToken;",
+									"    const refreshToken = response.refreshToken;",
+									"    const email = response.email;",
+									"    const id = response.id;",
+									"    if (accessToken) {",
+									"        pm.environment.set('access_token', accessToken);",
+									"    }",
+									"    if (refreshToken) {",
+									"        pm.environment.set('refresh_token', refreshToken);",
+									"    }",
+									"    if (email) {",
+									"        pm.environment.set('userEmail', email);",
+									"    }",
+									"    if (id) {",
+									"        pm.environment.set('userId', id);",
+									"    }",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{$randomEmail}}\",\n    \"password\": \"Test@123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/signup",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						},
+						"description": "Register a new user with email and password"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"{{$randomEmail}}\",\n    \"password\": \"Test@123\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/signup",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "694"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b6-CeZ3hTe8ERUV8z0E3yfaBmOBH80\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Mar 2025 06:53:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"id\": \"e6ce696f-019b-4585-aa7d-aff53d998dfd\",\n        \"email\": \"Martina_Schmeler87@hotmail.com\",\n        \"createdAt\": \"2025-03-13T06:53:54.544Z\",\n        \"updatedAt\": \"2025-03-13T06:53:54.544Z\"\n    },\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ik1hcnRpbmFfU2NobWVsZXI4N0Bob3RtYWlsLmNvbSIsInN1YiI6ImU2Y2U2OTZmLTAxOWItNDU4NS1hYTdkLWFmZjUzZDk5OGRmZCIsImlhdCI6MTc0MTg0ODgzNCwiZXhwIjoxNzQxODQ5NDM0fQ.89EK4h9Ok-q70vUSdyqtctmkDVidRE6UXlWsia-GEhg\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ik1hcnRpbmFfU2NobWVsZXI4N0Bob3RtYWlsLmNvbSIsInN1YiI6ImU2Y2U2OTZmLTAxOWItNDU4NS1hYTdkLWFmZjUzZDk5OGRmZCIsImlhdCI6MTc0MTg0ODgzNCwiZXhwIjoxNzQyNDUzNjM0fQ.JhJI5u15Hnil3QJe6jBdRBjfYIPnuEniMuUEeQZiiS8\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();",
+									"if (pm.response.code === 200) {",
+									"    const accessToken = response.accessToken;",
+									"    const refreshToken = response.refreshToken;",
+									"    const email = response.email;",
+									"    const id = response.id;",
+									"    if (accessToken) {",
+									"        pm.environment.set('access_token', accessToken);",
+									"    }",
+									"    if (refreshToken) {",
+									"        pm.environment.set('refresh_token', refreshToken);",
+									"    }",
+									"    if (email) {",
+									"        pm.environment.set('userEmail', email);",
+									"    }",
+									"    if (id) {",
+									"        pm.environment.set('userId', id);",
+									"    }",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{userEmail}}\",\n    \"password\": \"Test@123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login with email and password to get access and refresh tokens"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"{{userEmail}}\",\n    \"password\": \"Test@123\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "650"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"28a-FYyaRo3Ln3O/4zcFfEhVOKASfhs\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Mar 2025 06:53:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"id\": \"9df35ba4-9094-422d-aa08-f4795affb0ce\",\n        \"email\": \"Will92@hotmail.com\",\n        \"createdAt\": \"2025-03-13T03:38:09.386Z\",\n        \"updatedAt\": \"2025-03-13T06:53:06.748Z\"\n    },\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IldpbGw5MkBob3RtYWlsLmNvbSIsInN1YiI6IjlkZjM1YmE0LTkwOTQtNDIyZC1hYTA4LWY0Nzk1YWZmYjBjZSIsImlhdCI6MTc0MTg0ODgxOSwiZXhwIjoxNzQxODQ5NDE5fQ.DtMoeClOEmZFu51q5_shH0q9GGGtjAjH-j99uWL6wMA\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IldpbGw5MkBob3RtYWlsLmNvbSIsInN1YiI6IjlkZjM1YmE0LTkwOTQtNDIyZC1hYTA4LWY0Nzk1YWZmYjBjZSIsImlhdCI6MTc0MTg0ODgxOSwiZXhwIjoxNzQyNDUzNjE5fQ.ScFrrf1vvjnU7SxzrPs-AFlfJbKciLPTX28za9985rA\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Refresh Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();",
+									"if (pm.response.code === 200) {",
+									"    const accessToken = response.accessToken;",
+									"    const refreshToken = response.refreshToken;",
+									"    if (accessToken) {",
+									"        pm.environment.set('access_token', accessToken);",
+									"    }",
+									"    if (refreshToken) {",
+									"        pm.environment.set('refresh_token', refreshToken);",
+									"    }",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refreshToken\": \"{{refresh_token}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/refresh",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"refresh"
+							]
+						},
+						"description": "Get new access token using refresh token"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"refreshToken\": \"{{refresh_token}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/refresh",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"refresh"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "650"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"28a-Ia+623TItQtg38+3DlEdi2xaolM\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Mar 2025 06:53:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"id\": \"9df35ba4-9094-422d-aa08-f4795affb0ce\",\n        \"email\": \"Will92@hotmail.com\",\n        \"createdAt\": \"2025-03-13T03:38:09.386Z\",\n        \"updatedAt\": \"2025-03-13T06:53:00.049Z\"\n    },\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IldpbGw5MkBob3RtYWlsLmNvbSIsInN1YiI6IjlkZjM1YmE0LTkwOTQtNDIyZC1hYTA4LWY0Nzk1YWZmYjBjZSIsImlhdCI6MTc0MTg0ODc4NiwiZXhwIjoxNzQxODQ5Mzg2fQ.haapv_k9xPyoc7-n0FPRi0y0Pt7fdYHxScrv31aWkrE\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IldpbGw5MkBob3RtYWlsLmNvbSIsInN1YiI6IjlkZjM1YmE0LTkwOTQtNDIyZC1hYTA4LWY0Nzk1YWZmYjBjZSIsImlhdCI6MTc0MTg0ODc4NiwiZXhwIjoxNzQyNDUzNTg2fQ.Hgdh3XYzDHxMewSo3Gep6uYuhVv79UJYUuocvXdxLuA\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Authentication related endpoints"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}
