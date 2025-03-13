@@ -14,12 +14,30 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(uuid())
+  id            Int       @id @default(autoincrement())
   email         String    @unique
   password      String
   refreshToken  String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+  trades        Trade[]   // Relation to Trade model
 
+  @@index([id])
   @@map("users")
+}
+
+model Trade {
+  id        Int      @id @default(autoincrement())
+  type      String   // 'buy' or 'sell'
+  user_id   Int
+  user      User     @relation(fields: [user_id], references: [id])
+  symbol    String
+  shares    Int
+  price     Float
+  timestamp BigInt   // Changed from DateTime to BigInt for epoch timestamp
+
+  @@index([id])
+  @@index([type])
+  @@index([user_id])
+  @@map("trades")
 }

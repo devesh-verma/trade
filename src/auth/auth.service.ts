@@ -27,7 +27,7 @@ export class AuthService {
     return null;
   }
 
-  async generateTokens(userId: string, email: string): Promise<AuthTokensDto> {
+  async generateTokens(userId: number, email: string): Promise<AuthTokensDto> {
     const payload = { email, sub: userId };
 
     const [accessToken, refreshToken] = await Promise.all([

@@ -13,7 +13,7 @@ export class UsersService {
     });
   }
 
-  async findById(id: string): Promise<IUser | null> {
+  async findById(id: number): Promise<IUser | null> {
     return this.prisma.user.findUnique({
       where: { id },
     });
@@ -31,7 +31,7 @@ export class UsersService {
   }
 
   async updateRefreshToken(
-    userId: string,
+    userId: number,
     refreshToken: string | null,
   ): Promise<void> {
     await this.prisma.user.update({

@@ -13,12 +13,6 @@ import jwtConfig from './jwt.config';
       cache: true,
       expandVariables: true,
       load: [jwtConfig],
-      validationOptions: {
-        abortEarly: true,
-        allowUnknown: false,
-        whitelist: true,
-        forbidNonWhitelisted: true,
-      },
     }),
   ],
   exports: [NestConfigModule],
