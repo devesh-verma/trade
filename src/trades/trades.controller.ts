@@ -39,8 +39,8 @@ export class TradesController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string, @User('id') user_id: number) {
-    const trade = await this.tradesService.findOne(+id, user_id);
+  async findOne(@Param('id') id: string) {
+    const trade = await this.tradesService.findOne(+id);
     if (!trade) {
       throw new NotFoundException('Trade not found');
     }

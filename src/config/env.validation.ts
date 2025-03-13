@@ -35,6 +35,35 @@ export class EnvironmentVariables {
   @IsString()
   @IsNotEmpty()
   JWT_REFRESH_EXPIRATION_SECONDS!: string;
+
+  // Database
+  @IsString()
+  @IsNotEmpty()
+  DATABASE_HOST!: string;
+
+  @IsInt()
+  @Type(() => Number)
+  DATABASE_PORT!: number;
+
+  @IsString()
+  @IsNotEmpty()
+  DATABASE_USER!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  DATABASE_PASSWORD!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  DATABASE_NAME!: string;
+
+  @IsInt()
+  @Type(() => Number)
+  DATABASE_POOL_SIZE!: number;
+
+  @IsString()
+  @IsNotEmpty()
+  DATABASE_URL!: string;
 }
 
 export function validate(config: Record<string, unknown>) {

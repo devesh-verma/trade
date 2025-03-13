@@ -1,7 +1,6 @@
 import { TradeType } from '../enums/trade.enum';
 
 interface ITrade {
-  id: number;
   type: TradeType;
   user_id: number;
   symbol: string;
@@ -14,5 +13,6 @@ export interface ITradeRequest extends ITrade {
 }
 
 export interface ITradeResponse extends ITrade {
-  timestamp: Date;
+  id: number;
+  timestamp: bigint;
 }

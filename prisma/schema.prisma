@@ -39,5 +39,8 @@ model Trade {
   @@index([id])
   @@index([type])
   @@index([user_id])
+
+  @@index([type, id])
+  @@index([user_id, id])
   @@map("trades")
 }

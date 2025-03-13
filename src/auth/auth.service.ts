@@ -19,6 +19,9 @@ export class AuthService {
     password: string,
   ): Promise<Omit<IUser, 'password'> | null> {
     const user = await this.usersService.findByEmail(email);
+    if (!user) {
+      return null;
+    }
     const passwordMatched = await bcrypt.compare(password, user.password);
     if (user && passwordMatched) {
       delete user.password;

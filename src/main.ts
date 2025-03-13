@@ -23,6 +23,10 @@ async function bootstrap() {
   const port = configService.get('PORT');
   const nodeEnv = configService.get('NODE_ENV');
   await app.listen(port);
-  logger.log(`Server is running on port ${port} in ${nodeEnv} mode`);
+  logger.log(`Server is running`, {
+    port,
+    nodeEnv,
+    ormType: configService.get('ORM_TYPE'),
+  });
 }
 bootstrap();
