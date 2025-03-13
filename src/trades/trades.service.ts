@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../core/databases/prisma/prisma.service';
-import { CreateTradeDto } from './dto/create-trade.dto';
+import { CreateTradeDtoWithUserId } from './dto/create-trade.dto';
 import { FilterTradeDto } from './dto/filter-trade.dto';
 
 @Injectable()
 export class TradesService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(createTradeDto: CreateTradeDto) {
+  async create(payload: CreateTradeDtoWithUserId) {
     const result = await this.prisma.trade.create({
       data: {
-        ...createTradeDto,
+        ...payload,
         timestamp: BigInt(new Date().getTime()),
       },
     });
@@ -37,9 +37,9 @@ export class TradesService {
     }));
   }
 
-  async findOne(id: number) {
+  async findOne(id: number, user_id: number) {
     const trade = await this.prisma.trade.findUnique({
-      where: { id },
+      where: { id, user_id },
     });
     if (!trade) {
       return null;

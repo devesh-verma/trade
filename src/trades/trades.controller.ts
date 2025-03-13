@@ -4,8 +4,8 @@ import {
   Delete,
   Get,
   HttpCode,
-  HttpException,
   HttpStatus,
+  MethodNotAllowedException,
   NotFoundException,
   Param,
   Patch,
@@ -13,6 +13,7 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
+import { User } from 'src/auth/decorators/user.decorator';
 import { CreateTradeDto } from './dto/create-trade.dto';
 import { FilterTradeDto } from './dto/filter-trade.dto';
 import { TradesService } from './trades.service';
@@ -22,8 +23,14 @@ export class TradesController {
   constructor(private readonly tradesService: TradesService) {}
 
   @Post()
-  async create(@Body() createTradeDto: CreateTradeDto) {
-    return this.tradesService.create(createTradeDto);
+  async create(
+    @User('id') user_id: number,
+    @Body() createTradeDto: CreateTradeDto,
+  ) {
+    return this.tradesService.create({
+      ...createTradeDto,
+      user_id,
+    });
   }
 
   @Get()
@@ -32,8 +39,8 @@ export class TradesController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
-    const trade = await this.tradesService.findOne(+id);
+  async findOne(@Param('id') id: string, @User('id') user_id: number) {
+    const trade = await this.tradesService.findOne(+id, user_id);
     if (!trade) {
       throw new NotFoundException('Trade not found');
     }
@@ -43,27 +50,18 @@ export class TradesController {
   @Put(':id')
   @HttpCode(HttpStatus.METHOD_NOT_ALLOWED)
   async put() {
-    throw new HttpException(
-      'Method not allowed',
-      HttpStatus.METHOD_NOT_ALLOWED,
-    );
+    throw new MethodNotAllowedException('Method not allowed');
   }
 
   @Patch(':id')
   @HttpCode(HttpStatus.METHOD_NOT_ALLOWED)
   async update() {
-    throw new HttpException(
-      'Method not allowed',
-      HttpStatus.METHOD_NOT_ALLOWED,
-    );
+    throw new MethodNotAllowedException('Method not allowed');
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.METHOD_NOT_ALLOWED)
   async remove() {
-    throw new HttpException(
-      'Method not allowed',
-      HttpStatus.METHOD_NOT_ALLOWED,
-    );
+    throw new MethodNotAllowedException('Method not allowed');
   }
 }
