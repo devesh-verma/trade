@@ -9,6 +9,7 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
+    "start:dev": "ORM_TYPE=prisma nest start --watch",
     "start:dev:native": "ORM_TYPE=native nest start --watch",
     "start:dev:drizzle": "ORM_TYPE=drizzle nest start --watch",
     "start:dev:prisma": "ORM_TYPE=prisma nest start --watch",
